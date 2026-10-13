@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import laptopImage from './images/laptop.png'
+import receivedImage from './images/received.png'
 
 const Icon = ({ name, size = 30 }) => {
   const paths = {
     gift: <><rect x="4" y="10" width="24" height="16" rx="2" /><path d="M16 10v16M3 16h26M16 10c-6 0-8-2-8-4s2-3 4-3c3 0 4 4 4 7Zm0 0c6 0 8-2 8-4s-2-3-4-3c-3 0-4 4-4 7Z" /></>,
     bolt: <path d="m18 2-12 15h9l-2 11 12-16h-9l2-10Z" />,
     users: <><circle cx="10" cy="10" r="4" /><circle cx="22" cy="11" r="3" /><path d="M2 27c0-5 3-8 8-8s8 3 8 8M18 20c5-1 8 2 8 7" /></>,
+    handshake: <><path d="m4 13 5-5 6 2 3-2 6 5-4 4-4-3-4 4-8-5Z" /><path d="m8 19 3 3 3-2 3 2 5-5M15 10l3 4" /></>,
+    trophy: <><path d="M10 4h12v7c0 5-3 8-6 8s-6-3-6-8V4Z" /><path d="M10 7H5v2c0 4 2 6 5 6M22 7h5v2c0 4-2 6-5 6M16 19v6M10 28h12M12 4h8" /></>,
     palette: <path d="M16 3a13 13 0 0 0 0 26h2a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h5a8 8 0 0 0 8-8C29 5 23 3 16 3Z M8 12h.01M12 8h.01M20 8h.01M24 12h.01" />,
     file: <><path d="M7 2h14l5 5v21H7z" /><path d="M21 2v6h5M11 14h11M11 19h11M11 24h7" /></>,
     shield: <path d="M16 2 28 7v8c0 8-5 12-12 15C9 27 4 23 4 15V7l12-5Zm-5 14 3 3 7-7" />,
@@ -20,8 +24,8 @@ const Icon = ({ name, size = 30 }) => {
 
 const benefits = [
   ['users', 'Employee recognition', 'Say thanks for a win, a milestone, or just a hard week. Same-day delivery, personal message, and a card that lets them pick what they actually want.'],
-  ['gift', 'Client gifts', 'Skip the branded merch nobody keeps. Send a gift card with your logo and a personal note, and be the one they remember.'],
-  ['bolt', 'Sales incentives & rewards', 'Run promos, spiffs, and channel incentives without warehouse logistics. Order in bulk, schedule delivery, track redemption.'],
+  ['handshake', 'Client gifts', 'Skip the branded merch nobody keeps. Send a gift card with your logo and a personal note, and be the one they remember.'],
+  ['trophy', 'Sales incentives & rewards', 'Run promos, spiffs, and channel incentives without warehouse logistics. Order in bulk, schedule delivery, track redemption.'],
   ['calendar', 'EOFY, Christmas & seasonal', 'Handle five recipients or five hundred from the same dashboard. Batch-send, schedule ahead, and stay under the $300 FBT minor benefit threshold.'],
 ]
 
@@ -90,7 +94,7 @@ function App() {
         <section className="platform container"><h2>One platform. Every gifting moment</h2><div className="benefit-grid">{benefits.map(([icon, title, text]) => <article className="card benefit" key={title}><div className="icon pink-icon"><Icon name={icon} /></div><h3>{title}</h3><p>{text}</p></article>)}</div></section>
 
         <section className="how container" id="how-it-works"><h2>Built for the way Australian businesses actually gift</h2><div className="principle-grid">{principles.map(([icon, title, text]) => <article className={`card principle ${title.startsWith('6.') ? 'highlight-card' : ''}`} key={title}><div className="icon"><Icon name={icon} /></div><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
-          <h2 className="process-title">From brief to inbox in under five minutes</h2><div className="process-grid">{[['01','Choose your gift','Pick a single retailer or a multi-brand card that lets your recipient choose. Set the amount from $5 to $500.'],['02','Personalise & upload','Add your logo, message and greeting theme. Enter one recipient, or upload a spreadsheet for hundreds.'],['03','Send now or schedule','Deliver instantly or schedule to the minute. Track deliveries and redemption from your dashboard.']].map(([num,title,text], i) => <article className="card process" key={num}><span className="number">{num}</span><div className={`process-visual visual-${i}`}><span>{i === 0 ? 'JB HI-FI　 MYER' : i === 1 ? '▱　▣' : '▯　✉'}</span></div><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <h2 className="process-title">From brief to inbox in under five minutes</h2><div className="process-grid">{[['01','Choose your gift','Pick a single retailer or a multi-brand card that lets your recipient choose. Set the amount from $5 to $500.'],['02','Personalise & upload','Add your logo, message and greeting theme. Enter one recipient, or upload a spreadsheet for hundreds.'],['03','Send now or schedule','Deliver instantly or schedule to the minute. Track deliveries and redemption from your dashboard.']].map(([num,title,text], i) => <article className="card process" key={num}><span className="number">{num}</span><div className={`process-visual visual-${i}`}>{i === 0 ? <div className="brand-tiles"><b>JB HI-FI<small>GIFT CARD</small></b><b>MYER</b><b>coles</b><b>HOYTS</b><em>+100</em></div> : i === 1 ? <img className="process-image laptop-image" src={laptopImage} alt="Gift card personalisation on a laptop" /> : <img className="process-image received-image" src={receivedImage} alt="Gift card received on a phone" />}</div><h3>{title}</h3><p>{text}</p></article>)}</div>
           <div className="tax-banner"><div className="tax-item"><div className="round-icon"><Icon name="scale" /></div><div><h3>FBT-friendly by design</h3><p>Gift cards under $300 per recipient, given infrequently, generally qualify as a minor benefit exempt from Fringe Benefits Tax. We surface the threshold at checkout so your business can gift compliantly without a spreadsheet.</p></div></div><div className="tax-item"><div className="round-icon"><Icon name="invoice" /></div><div><h3>GST invoicing & payment</h3><p>Tax invoices on every order — automatic, downloadable, ready for your bookkeeper. Pay by credit card, or apply for invoice terms if you send regularly.</p></div></div><small>General information only — confirm with your tax advisor.</small></div>
         </section>
 
@@ -100,7 +104,7 @@ function App() {
 
         <section className="cta"><div className="container cta-inner"><div className="present">🎁</div><div><h2>Ready to make gifting the easy part?</h2><p>Set up a business account in minutes.<br />No subscription, no monthly minimums, no lock-in.</p></div><div className="cta-actions"><button className="btn white-btn">Create business account</button><button className="btn transparent-btn">Book a 15-minute demo</button></div></div></section>
       </main>
-      <footer><div className="container"><Logo /><span>© 2024 GiftPilot. Business gifting made easy.</span></div></footer>
+      
     </div>
   )
 }
